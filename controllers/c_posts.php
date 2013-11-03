@@ -23,7 +23,7 @@ class posts_controller extends base_controller {
 		$_POST['created']=Time::now();
 		$_POST['modified']=Time::now();
 
-		DB::instance(DB_NAME)->insert('posts',$_POST);
+		DB::instance(DB_NAME)->insert_row('posts',$_POST);
 
 		Router::redirect('/posts/');
 
@@ -33,24 +33,32 @@ class posts_controller extends base_controller {
 
 		$this->template->content = View::instance('v_posts_index');
 
-        $q = 'SELECT
-                posts.content,
-                posts.created,
-                posts.users_id as post_user_id,
-                users_users.user_id as follower_id,
-                users.first_name,
-                users.last_name
-            FROM posts
-            INNER JOIN users_users
-                ON posts.user_id = users_users.user_id_followed
-            INNER JOIN users
-                ON posts.user_id = users.user_id
-            WHERE users_users.user_id = '.$this->user->user_id;
+    $q = "SELECT 
+            posts .* , 
+            users.first_name, 
+            users.last_name
+        FROM posts
+        INNER JOIN users 
+            ON posts.user_id = users.user_id";
 
+        // $q = 'SELECT
+        //         posts.content,
+        //         posts.created,
+        //         posts.users_id as post_user_id,
+        //         users_users.user_id as follower_id,
+        //         users.first_name,
+        //         users.last_name
+        //     FROM posts
+        //     INNER JOIN users_users
+        //         ON posts.user_id = users_users.user_id_followed
+        //     INNER JOIN users
+        //         ON posts.user_id = users.user_id
+        //     WHERE users_users.user_id = '.$this->user->user_id;
 
-		$this->template->content->posts = $posts;
 
 		$posts = DB::instance(DB_NAME)->select_rows($q);
+
+		$this->template->content->posts = $posts;
 
 		echo $this->template;
 
@@ -92,7 +100,7 @@ class posts_controller extends base_controller {
 
 	public function unfollow($user_id_followed) {
 
-		$where_condition = 'WHERE user_id = '.$this->user->user_id.'AND user_id_followed' = '.$user_id_followed';
+		$where_condition = 'WHERE user_id = '.$this->user->user_id.' AND user_id_followed = '.$user_id_followed;
 
 		DB::instance(DB_NAME)->delete('users_users',$where_condition);
 

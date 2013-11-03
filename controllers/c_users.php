@@ -54,8 +54,6 @@ class users_controller extends base_controller {
 
         $token = DB::instance(DB_NAME)->select_field($q);
 
-        echo $q;
-
         //success
         if($token) {
             setcookie('token',$token,strtotime('+1 year'),'/');
