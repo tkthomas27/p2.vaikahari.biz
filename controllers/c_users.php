@@ -5,9 +5,6 @@ class users_controller extends base_controller {
         parent::__construct();
     } 
 
-    public function index() {
-        echo "This is the index page";
-    }
 
     public function signup() {
 
@@ -38,53 +35,75 @@ class users_controller extends base_controller {
     public function login() {
 
         $this->template->content = View::instance('v_users_login');
+        // $this->template->title   = "Login";
+
+        //Render Template
         echo $this->template;
 
     }
 
     public function p_login() {
 
-        // echo "<pre>";
-        // print_r($_POST);
-        // echo "<pre>";
-
         $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
         $q = 
-            'SELECT *
+            'SELECT token
             FROM users
             WHERE email = "'.$_POST['email'].'"
             AND password = "'.$_POST['password'].'"';
 
         $token = DB::instance(DB_NAME)->select_field($q);
 
+        echo $q;
+
         //success
         if($token) {
             setcookie('token',$token,strtotime('+1 year'),'/');
-            echo "you are logged in";
+            /////////////experiment with this below
+            // echo "you are logged in";
+
+            //Route back to homepage
+            Router::redirect('/');
 
         }
 
         //fail
         else {
-            echo "login fail";
+            echo "login fail <a href='/users/login'>would you like to try again?</a>";
         }
 
     }
 
     public function logout() {
-        echo "This is the logout page";
+
+        $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
+
+        $data = Array('token'=>$new_token);
+
+        DB::instance(DB_NAME)->update('users',$data,'Where user_id ='.$this->user->user_id);
+
+        setcookie('token','',strtotime('-1 year'),'/');
+
+        Router::redirect('/');
+
     }
 
     public function profile($user_name = NULL) {
+
+        if(!$this->user){
+
+            //Router::redirect('/');
+            die('Members only. <a href="/users/login">Login</a>');
+
+        }
 
         //set up the view
         $this->template->content = View::instance('v_users_profile');
         $this->template->title = "Profile";
 
-        $client_files_head = Array('/css/profile.css');
+        // $client_files_head = Array('/css/profile.css');
 
-        $this->template->client_files = Utils::load_client_files($client_files_head);
+        // $this->template->client_files = Utils::load_client_files($client_files_head);
 
         //pass the data to the view
         $this->template->content->user_name = $user_name;
