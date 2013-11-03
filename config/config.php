@@ -31,10 +31,11 @@ A email designated to receive messages from the server. Examples:
 	define('SYSTEM_EMAIL', 'timothykylethomas@gmail.com'); 
 
 # Default DB name for this app
-	define('DB_NAME', 'p2_vaikahari_biz'); 
+	define('DB_NAME', 'vaikahar_p2_vaikahari_biz'); 
 
 # Timezone
 	define('TIMEZONE', 'America/New_York');
+	define('TIME_FORMAT', 'F j, Y g:ia');
 
 # If your app is going to have outgoing emails, you should fill in your SMTP settings
 # For this you could use gmail SMTP or something like http://sendgrid.com/
