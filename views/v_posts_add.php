@@ -5,6 +5,6 @@
 
 	<br><br>
 
-	<input type='Submit' value='new post'>
+	<input type='Submit' value='New post'>
 
 </form>
