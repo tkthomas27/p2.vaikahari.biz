@@ -21,6 +21,7 @@
 		<menu>
 			<li><a href='/'>Home</a></li>       
 				 <?php if($user): ?>
+				 	<li><a href='/users/profile'>Profile</a></li>
 					<li><a href='/posts/add'>Add Post</a></li>
 					<li><a href='/posts/'>View Posts</a></li>
 					<li><a href='/posts/users'>Follow Users</a></li>
