@@ -17,6 +17,18 @@
 
 	<a href="/users/profile">Back to Profile</a>
 
+	<h2>Password Reset</h2>
+
+<form method='POST' action='/users/p_password'>
+	
+	Email: <input type='text' name='email'><br>
+	Current Password <input type='password' name='password'><br>
+	New Password <input type="password" name='newpassword'>
+
+	<input type='submit' value='Submit Change'>
+
+</form>
+
 <?php else: ?>
 
 	<h1>No user specified</h1>

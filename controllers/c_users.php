@@ -133,6 +133,38 @@ class users_controller extends base_controller {
 
     }
 
-} # end of the class
+    public function p_password() {
 
+    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+
+    $q = 
+        'SELECT password
+        FROM users
+        WHERE email = "'.$_POST['email'].'"
+        AND password = "'.$_POST['password'].'"';
+
+        $pwd = DB::instance(DB_NAME)->select_field($q);
+
+    if($pwd) {
+        $new_password = sha1(PASSWORD_SALT.$_POST['newpassword']);
+
+        $pwdset = Array('password'=>$new_password);
+
+        DB::instance(DB_NAME)->update('users',$pwdset,'Where user_id ='.$this->user->user_id);
+
+        //logout
+        $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
+
+        $data = Array('token'=>$new_token);
+
+        DB::instance(DB_NAME)->update('users',$data,'Where user_id ='.$this->user->user_id);
+
+        setcookie('token','',strtotime('-1 year'),'/');
+
+        Router::redirect('/');
+    }
+
+}
+
+} # end of the class
 
