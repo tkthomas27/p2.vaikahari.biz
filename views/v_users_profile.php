@@ -11,8 +11,9 @@
 	<div id="thing" class="prodetail">Favorite Thing: <?=$user->favorite?></div>
 	<div id="freinds" class="prodetail">Best Friends: <?=$user->friends?></div>
 
-
+<div class='edit'>
 	<a href="/users/profileedit">Edit Profile</a>
+</div>
 
 <?php else: ?>
 

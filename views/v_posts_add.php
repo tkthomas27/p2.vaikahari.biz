@@ -1,10 +1,10 @@
+
 <form method='POST' action='/posts/p_add'>
 
-	<label for='content'>New Post:</label><br>
-	<textarea name='content' id='content'></textarea>
+	<textarea class='postform' name='content' placeholder='Add Post'></textarea>
 
 	<br><br>
 
-	<input type='Submit' value='New post'>
+	<input class='submit' type='Submit' value='New post'>
 
 </form>

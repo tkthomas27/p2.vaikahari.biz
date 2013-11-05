@@ -106,3 +106,60 @@ li a:hover,a:active {
 	font-family: sans-serif;
 	padding-top: 20px;
 }
+
+.edit a{
+	padding:10px;
+	width:150px;
+	height:30px;
+	font-size: 25px;
+	font-family: sans-serif;
+	text-decoration: none;
+	color:#F06060;
+	background-color:#5C4B51;
+	position:absolute;
+	text-align: center;
+}
+
+.edit a:hover {
+	color:#5C4B51;
+	background-color:#F3B562;
+}
+
+.postform {
+	position:absolute;
+	height:40px;
+	width:800px;
+	border-radius: 10px;
+	font-size: 30px;
+	text-align: center;
+	color:#5C4B51;
+	background-color:#8CBEB2;
+	padding:30px;
+	border:5px;
+	display:block;
+
+}
+
+.submit {
+	font-family: sans-serif;
+	font-size: 20px;
+	height: 40px;
+	width:100px;
+	color:#5C4B51;
+	background-color:#F3B562;
+	margin-top: 75px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
