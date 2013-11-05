@@ -1,6 +1,6 @@
 <?php if(isset($user)): ?>
 
-	<h1>This is the profile editor for <?=$user->first_name?> <?=$user->last_name?></h1>
+	<h1>Profile Editor: <?=$user->first_name?> <?=$user->last_name?></h1>
 
 	<h2>Edit Profile</h2>
 

@@ -11,6 +11,7 @@ menu {
     padding:0;
     list-style: none;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 nav li {
@@ -34,7 +35,7 @@ li a:hover,a:active {
 	background-color:#6A9D9E;
 }
 
-#log {
+.log {
 	font-family: sans-serif;
 	text-transform: lowercase;
 	color: #5C4B51;
@@ -44,13 +45,20 @@ li a:hover,a:active {
 	padding-left:5px;
 	padding-right:90px;
 	float:left;
+	border-radius: 5px;
 }
 
-#prohead {
+.prohead {
+	height:50px;
+	width:300px;
 	font-family: sans-serif;
+	font-size: 35px;
+	padding:5px;
+	font-weight: bold;
+	color:#5C4B51;
 }
 
-#note {
+.note {
 	font-family: sans-serif;
 	background-color: #F06060;
 	color: #5C4B51;
@@ -61,17 +69,20 @@ li a:hover,a:active {
 	padding-bottom: 5px;
 	padding-left:5px;
 	padding-right:90px;
+	border-radius: 10px;
 }
 
 .prodetail {
-	width: 80%;
+	width: 55%;
 	height: 50%;
 	font-family: sans-serif;
 	font-weight: bolder;
 	color: #5C4B51;
 	list-style: none;
 	padding: 10px;
-	background-color: #8CBEB2
+	background-color: #8CBEB2;
+	border-radius:10px;
+	line-height:20px;
 }
 
 .title {
@@ -97,6 +108,8 @@ li a:hover,a:active {
 	position:absolute;
 	text-align: left;
 	font-weight: bold;
+	color:#5C4B51;
+	border-radius: 10px;
 }
 
 .landing {
@@ -114,15 +127,17 @@ li a:hover,a:active {
 	font-size: 25px;
 	font-family: sans-serif;
 	text-decoration: none;
-	color:#F06060;
-	background-color:#5C4B51;
+	color:#5C4B51;
+	background-color:#F3B562;
 	position:absolute;
 	text-align: center;
+	margin-top: 5px;
+	border-radius: 10px;
 }
 
 .edit a:hover {
-	color:#5C4B51;
-	background-color:#F3B562;
+	color:#F06060;
+	background-color:#5C4B51;
 }
 
 .postform {
@@ -168,9 +183,45 @@ article time {
 	font-size: 10px;
 }
 
+.unfollow a{
+	width:100px;
+	height:25px;
+	font-size: 20px;
+	font-family: sans-serif;
+	text-decoration: none;
+	color:#5C4B51;
+	background-color:#F3B562;
+	position:absolute;
+	margin-top: 2px;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+}
 
+.unfollow a:hover {
+	color:#F06060;
+	background-color:#5C4B51;
+}
 
+.follow a{
+	width:100px;
+	height:25px;
+	font-size: 20px;
+	font-family: sans-serif;
+	text-decoration: none;
+	color:#5C4B51;
+	background-color:#F3B562;
+	position:absolute;
+	margin-top: 2px;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+}
 
+.follow a:hover {
+	color:white;
+	background-color:#8CBEB2;
+}
 
 
 

@@ -1,15 +1,18 @@
 <?php if(isset($user)): ?>
 
 
-	<h1 id="prohead"><?=$user->first_name?> <?=$user->last_name?></h1>
+	<div class="prohead">
+		<?=$user->first_name?> <?=$user->last_name?>
+	</div>
 
-	<span id="note">NOTE: your profile information is viewable by EVERYONE in the follow tab</span>
+	<span class="note">NOTE: your profile information is viewable by EVERYONE in the follow tab</span>
 
-
-	<div id="home" class="prodetail">Home: <?=$user->home?></div>
-	<div id="season" class="prodetail">Favorite Season: <?=$user->season?></div>
-	<div id="thing" class="prodetail">Favorite Thing: <?=$user->favorite?></div>
-	<div id="freinds" class="prodetail">Best Friends: <?=$user->friends?></div>
+<div class='prodetail'>
+	Home: <?=$user->home?><br>
+	Favorite Season: <?=$user->season?><br>
+	Favorite Thing: <?=$user->favorite?><br>
+	Best Friends: <?=$user->friends?><br>
+</div>
 
 <div class='edit'>
 	<a href="/users/profileedit">Edit Profile</a>

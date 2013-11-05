@@ -35,7 +35,7 @@
 
 
 	<?php if($user): ?>
-		<p id="log">You are logged in as <?=$user->first_name?> <?=$user->last_name?></p><br>
+		<p class="log">You are logged in as <?=$user->first_name?> <?=$user->last_name?></p><br>
 	<?php endif; ?>
 
 	<br><br>
