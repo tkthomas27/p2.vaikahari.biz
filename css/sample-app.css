@@ -150,8 +150,23 @@ li a:hover,a:active {
 	margin-top: 75px;
 }
 
+article {
+	font-family: sans-serif;
+	color:#5C4B51;
+	background-color: #8CBEB2;
+	border-radius:10px;
+	padding-left:8px;
+	width:70%;
+	height:110px;
+}
 
+article p {
+	font-size: 20px;
+}
 
+article time {
+	font-size: 10px;
+}
 
 
 
