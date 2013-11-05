@@ -5,11 +5,11 @@
 	<h2>Edit Profile</h2>
 
 <form method='POST' action='/users/p_profileedit'>
-	
-	Home <input type='text' name='home'><br>
-	Favorite Season <input type='text' name='season'><br>
-	Favorite Thing <input type='text' name='favorite'><br>
-	Best Friends<input type='text' name='friends'><br>
+
+	Home <input type='text' name='home'>
+	Favorite Season <input type='text' name='season'>
+	Favorite Thing <input type='text' name='favorite'>
+	Best Friends<input type='text' name='friends'>
 
 	<input type='submit' value='Submit Edit'>
 
