@@ -175,6 +175,13 @@ class users_controller extends base_controller {
 
 	public function p_password() {
 
+		//check input for blank fields, if blanks exist, die and show error message
+		foreach($_POST as $field => $value) {
+			if(empty($value)) {
+				die("<h2>Please, No blank fields</h2><br><a href='/users/profile'>Profile</a>");
+			}
+		}
+
 		//encode posted password
 		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
@@ -211,6 +218,9 @@ class users_controller extends base_controller {
 
 			//route the user back to the home page
 			Router::redirect('/');
+		}
+		else {
+			die("<h2>Please, Use the right password</h2><br><a href='/users/profileedit'>Sign Up</a>");
 		}
 
 	}
