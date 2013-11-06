@@ -31,7 +31,19 @@ class posts_controller extends base_controller {
 		DB::instance(DB_NAME)->insert('posts',$_POST);
 
 		//route user to the post
-		Router::redirect('/posts/');
+		Router::redirect('/posts/success');
+
+	}
+
+	public function success() {
+
+		//set up the view
+		$this->template->content = View::instance("v_posts_success");
+		$this->template->title = "Successful Post!";
+
+		//render the view
+		echo $this->template;
+
 
 	}
 

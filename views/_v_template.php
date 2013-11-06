@@ -15,6 +15,7 @@
 
 <body>	
 
+	<div class='wrap'>
 	<!-- main menu at the top of the screen-->
 	<nav>
 		<menu class="nav">
@@ -43,6 +44,8 @@
 	<?php if(isset($content)) echo $content; ?>
 
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
+	
+	</div>
 	
 </body>
 </html>
