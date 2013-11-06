@@ -1,193 +1,219 @@
 <?php
 class users_controller extends base_controller {
 
-    public function __construct() {
-        parent::__construct();
-    } 
+	public function __construct() {
+		parent::__construct();
+	} 
 
 
-    public function signup($error = NULL) {
+	public function signup($error = NULL) {
 
-        // set up the views
-        $this->template->content = View::instance('v_users_signup');
-        $this->template->content->error = $error;
+		// set up the views
+		$this->template->content = View::instance('v_users_signup');
+		$this->template->content->error = $error;
 
-        // render the view
-        echo $this->template;
+		// render the view
+		echo $this->template;
 
-    }
+	}
 
-    public function p_signup() {
+	public function p_signup() {
 
-        //check input for blank fields, if blanks exist, die and show error message
-        foreach($_POST as $field => $value) {
-            if(empty($value)) {
-                die("<h2>Please, No blank fields</h2><br><a href=/'/users/signup/'>Sign Up</a>");
-            }
-        }
+		//check input for blank fields, if blanks exist, die and show error message
+		foreach($_POST as $field => $value) {
+			if(empty($value)) {
+				die("<h2>Please, No blank fields</h2><br><a href=/'/users/signup/'>Sign Up</a>");
+			}
+		}
 
-        //check if email already exists
-        $exists = DB::instance(DB_NAME)->select_field('SELECT email FROM users WHERE email = "'.$_POST['email'].'"');
+		//check if email already exists
+		$exists = DB::instance(DB_NAME)->select_field('SELECT email FROM users WHERE email = "'.$_POST['email'].'"');
 
-        //if email exists, die and show an error message
-        if($exists){
-            die("<h2>Please, that email is already in use</h2><br><a href=/'/users/signup/'>Sign Up</a>");
-        }
+		//if email exists, die and show an error message
+		if($exists){
+			die("<h2>Please, that email is already in use</h2><br><a href=/'/users/signup/'>Sign Up</a>");
+		}
 
-        else {
+		else {
 
-        $_POST['created']= Time::now();
-        $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
-        $_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+		//add a created time to users
+		$_POST['created']= Time::now();
 
-        DB::instance(DB_NAME)->insert_row('users',$_POST);
+		//encode the password and create a token
+		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+		$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
 
-        Router::redirect('/users/login');
+		//add form info and time/token to DB
+		DB::instance(DB_NAME)->insert_row('users',$_POST);
 
-        }
-        
-    }
+		//route user to the login page
+		Router::redirect('/users/login');
 
-    public function login() {
+		}
+		
+	}
 
-        $this->template->content = View::instance('v_users_login');
-        $this->template->title   = "Login";
+	public function login() {
 
-        //Render Template
-        echo $this->template;
+		//set up the view
+		$this->template->content = View::instance('v_users_login');
+		$this->template->title   = "Login";
 
-    }
+		//Render Template
+		echo $this->template;
 
-    public function p_login() {
+	}
 
-        $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+	public function p_login() {
 
-        $q = 
-            'SELECT token
-            FROM users
-            WHERE email = "'.$_POST['email'].'"
-            AND password = "'.$_POST['password'].'"';
+		//encode the password following the signup procedure
+		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
-        $token = DB::instance(DB_NAME)->select_field($q);
+		//establish a query to check password and email match in the DB to generate a cookie based on corresponding token
+		$q = 
+			'SELECT token
+			FROM users
+			WHERE email = "'.$_POST['email'].'"
+			AND password = "'.$_POST['password'].'"';
 
-        //success
-        if($token) {
-            setcookie('token',$token,strtotime('+1 year'),'/');
-            /////////////experiment with this below
-            // echo "you are logged in";
 
-            //Route back to homepage
-            Router::redirect('/');
+		$token = DB::instance(DB_NAME)->select_field($q);
 
-        }
+		//if token is generated, set a cookie
+		if($token) {
+			setcookie('token',$token,strtotime('+1 year'),'/');
 
-        //fail
-        else {
-            echo "login fail <a href='/users/login'>would you like to try again?</a>";
-        }
+			//Route back to homepage
+			Router::redirect('/');
 
-    }
+		}
 
-    public function logout() {
+		//if failure, then try again
+		else {
+			echo "<h2>login fail <a href='/users/login'>would you like to try again?</a></h2>";
+		}
 
-        $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
+	}
 
-        $data = Array('token'=>$new_token);
+	public function logout() {
 
-        DB::instance(DB_NAME)->update('users',$data,'Where user_id ='.$this->user->user_id);
+		$new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
 
-        setcookie('token','',strtotime('-1 year'),'/');
+		$data = Array('token'=>$new_token);
 
-        Router::redirect('/');
+		//change to token based on loged out status
+		DB::instance(DB_NAME)->update('users',$data,'Where user_id ='.$this->user->user_id);
 
-    }
+		//set expiration date of cookie
+		setcookie('token','',strtotime('-1 year'),'/');
 
-    public function profile($user_name = NULL) {
+		//redirect user to homepage
+		Router::redirect('/');
 
-        if(!$this->user){
-            die('Please, <a href="/users/login">Login</a>');
-        }
+	}
 
-        //set up the view
-        $this->template->content = View::instance('v_users_profile');
-        $this->template->title = "Profile";
+	public function profile($user_name = NULL) {
 
-        //pass the data to the view
-        $this->template->content->user_name = $user_name;
+		//if user is not logged in, they cannot see the page
+		if(!$this->user){
+			die('Please, <a href="/users/login">Login</a>');
+		}
 
-        //display the view
-        echo $this->template;
+		//set up the view
+		$this->template->content = View::instance('v_users_profile');
+		$this->template->title = "Profile";
 
-    }
+		//pass the data to the view
+		$this->template->content->user_name = $user_name;
 
-    public function profileedit($user_name = NULL) {
+		//display the view
+		echo $this->template;
 
-        if(!$this->user){
-            die('Please, <a href="/users/login">Login</a>');
-        }
+	}
 
-        //set up the view
-        $this->template->content = View::instance('v_users_profileedit');
-        $this->template->title = "Profile Edit";
+	public function profileedit($user_name = NULL) {
 
-        //pass the data to the view
-        $this->template->content->user_name = $user_name;
+		//if user is not logged in, they cannot see the page
+		if(!$this->user){
+			die('Please, <a href="/users/login">Login</a>');
+		}
 
-        $this->template->content->error = $error;
+		//set up the view
+		$this->template->content = View::instance('v_users_profileedit');
+		$this->template->title = "Profile Edit";
 
-        //display the view
-        echo $this->template;
+		//pass the data to the view
+		$this->template->content->user_name = $user_name;
 
-    }
+		//pass error data to the view
+		$this->template->content->error = $error;
 
-    public function p_profileedit() {
+		//display the view
+		echo $this->template;
 
-        $new_home = $_POST['home'];
-        $new_season = $_POST['season'];
-        $new_favorite = $_POST['favorite'];
-        $new_friends = $_POST['friends'];
+	}
 
-        $prodata = Array('home'=>$new_home,'season'=>$new_season,'favorite'=>$new_favorite,'friends'=>$new_friends);
+	public function p_profileedit() {
 
-        DB::instance(DB_NAME)->update('users',$prodata,'Where user_id ='.$this->user->user_id);
+		//accept the information from the field
+		$new_home = $_POST['home'];
+		$new_season = $_POST['season'];
+		$new_favorite = $_POST['favorite'];
+		$new_friends = $_POST['friends'];
 
-        Router::redirect('/users/profile');
+		//set incoming data as an array
+		$prodata = Array('home'=>$new_home,'season'=>$new_season,'favorite'=>$new_favorite,'friends'=>$new_friends);
 
+		//use sql to update the DB with the information stored in the array above
+		DB::instance(DB_NAME)->update('users',$prodata,'Where user_id ='.$this->user->user_id);
 
-    }
+		//route the user back to the profile page
+		Router::redirect('/users/profile');
 
-    public function p_password() {
 
-    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+	}
 
-    $q = 
-        'SELECT password
-        FROM users
-        WHERE email = "'.$_POST['email'].'"
-        AND password = "'.$_POST['password'].'"';
+	public function p_password() {
 
-        $pwd = DB::instance(DB_NAME)->select_field($q);
+		//encode posted password
+		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
-    if($pwd) {
-        $new_password = sha1(PASSWORD_SALT.$_POST['newpassword']);
+		//generate query to match password and email
+		$q = 
+			'SELECT password
+			FROM users
+			WHERE email = "'.$_POST['email'].'"
+			AND password = "'.$_POST['password'].'"';
 
-        $pwdset = Array('password'=>$new_password);
+		//generte var for selecting fields matching the query
+		$pwd = DB::instance(DB_NAME)->select_field($q);
 
-        DB::instance(DB_NAME)->update('users',$pwdset,'Where user_id ='.$this->user->user_id);
+		//if var is true carry out these commands to generate a new password
+		if($pwd) {
 
-        //logout
-        $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
+			//encode the new posted password
+			$new_password = sha1(PASSWORD_SALT.$_POST['newpassword']);
 
-        $data = Array('token'=>$new_token);
+			//set var for changing password to new password
+			$pwdset = Array('password'=>$new_password);
 
-        DB::instance(DB_NAME)->update('users',$data,'Where user_id ='.$this->user->user_id);
+			//update the users table with the above array where the logged in user equals the user_id
+			DB::instance(DB_NAME)->update('users',$pwdset,'Where user_id ='.$this->user->user_id);
 
-        setcookie('token','',strtotime('-1 year'),'/');
+			//logout process same as above
+			$new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
 
-        Router::redirect('/');
-    }
+			$data = Array('token'=>$new_token);
 
-}
+			DB::instance(DB_NAME)->update('users',$data,'Where user_id ='.$this->user->user_id);
+
+			setcookie('token','',strtotime('-1 year'),'/');
+
+			//route the user back to the home page
+			Router::redirect('/');
+		}
+
+	}
 
 } # end of the class
 
