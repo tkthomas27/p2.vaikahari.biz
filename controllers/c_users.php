@@ -8,9 +8,8 @@ class users_controller extends base_controller {
 
     public function signup($error = NULL) {
 
-        // set up the view
+        // set up the views
         $this->template->content = View::instance('v_users_signup');
-
         $this->template->content->error = $error;
 
         // render the view
@@ -20,7 +19,7 @@ class users_controller extends base_controller {
 
     public function p_signup() {
 
-        //check input for blank fields
+        //check input for blank fields, if blanks exist, die and show error message
         foreach($_POST as $field => $value) {
             if(empty($value)) {
                 die("<h2>Please, No blank fields</h2><br><a href=/'/users/signup/'>Sign Up</a>");
@@ -30,6 +29,7 @@ class users_controller extends base_controller {
         //check if email already exists
         $exists = DB::instance(DB_NAME)->select_field('SELECT email FROM users WHERE email = "'.$_POST['email'].'"');
 
+        //if email exists, die and show an error message
         if($exists){
             die("<h2>Please, that email is already in use</h2><br><a href=/'/users/signup/'>Sign Up</a>");
         }
