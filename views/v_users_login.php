@@ -1,10 +1,12 @@
-<h2>Log in</h2>
+<div class='prohead'>
+	Please, Sign In
+</div>
 
-<form method='POST' action='/users/p_login'>
+<form method='POST' action='/users/p_login' class='login'>
 
 	Email: <input type='text' name='email'><br>
-	Password: <input type='passowrd' name='password'><br>
+	Password: <input type='password' name='password'><br>
 
-	<input type='Submit' value='log in'>
+	<input type='Submit' value='Log In' class='loginsubmit'>
 
 </form>

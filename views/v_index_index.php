@@ -23,7 +23,7 @@
 <?php else: ?>
 
 <div class="landing">
-
+<!-- fix this -->
 	Please sign up or log in
 
 </div>

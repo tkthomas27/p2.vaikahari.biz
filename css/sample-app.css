@@ -99,7 +99,7 @@ li a:hover,a:active {
 
 .plusone {
 	height:50px;
-	width:60%;
+	width:70%;
 	padding-top: 10px;
 	padding-left:5px;
 	font-size: 30px;
@@ -223,9 +223,73 @@ article time {
 	background-color:#8CBEB2;
 }
 
+.proedithead {
+	height:50px;
+	width:700px;
+	font-family: sans-serif;
+	font-size: 35px;
+	padding:5px;
+	font-weight: bold;
+	color:#5C4B51;
+	position: relative;
+	margin-top: 20px;
+}
 
+.profileedit {
+	width: 55%;
+	height: 120px;
+	font-family: sans-serif;
+	font-weight: bolder;
+	color: #5C4B51;
+	list-style: none;
+	padding: 10px;
+	background-color: #8CBEB2;
+	border-radius:10px;
+	line-height:20px;
+}
 
+.proeditsubmit {
+	font-family: sans-serif;
+	font-size: 20px;
+	width:200px;
+	color:#5C4B51;
+	background-color:#F3B562;
+	position:relative;
+}
 
+.profileedit input {
+	border-radius: 10px;
+	background-color: #F3B562;
+	color:#5C4B51;
+	font-family:sans-serif;
+}
 
+.login {
+	width: 55%;
+	height: 80px;
+	font-family: sans-serif;
+	font-weight: bolder;
+	color: #5C4B51;
+	list-style: none;
+	padding: 10px;
+	background-color: #8CBEB2;
+	border-radius:10px;
+	line-height:20px;
+}
 
+.login input {
+	border-radius: 10px;
+	background-color: #F3B562;
+	color:#5C4B51;
+	font-family:sans-serif;
+}
+
+.loginsubmit {
+	font-family: sans-serif;
+	font-size: 20px;
+	width:100px;
+	color:#5C4B51;
+	background-color:#F3B562;
+	position:relative;
+}
 

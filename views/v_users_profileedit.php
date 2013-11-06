@@ -1,33 +1,35 @@
 <?php if(isset($user)): ?>
 
-	<h1>Profile Editor: <?=$user->first_name?> <?=$user->last_name?></h1>
+	<div class='proedithead'>
+	Profile Editor: <?=$user->first_name?> <?=$user->last_name?>
+	</div>
 
-	<h2>Edit Profile</h2>
 
-<form method='POST' action='/users/p_profileedit'>
+<form class='profileedit' method='POST' action='/users/p_profileedit'>
 
-	Home <input type='text' name='home'>
-	Favorite Season <input type='text' name='season'>
-	Favorite Thing <input type='text' name='favorite'>
-	Best Friends<input type='text' name='friends'>
+	Home <input type='text' name='home'><br>
+	Favorite Season <input type='text' name='season'><br>
+	Favorite Thing <input type='text' name='favorite'><br>
+	Best Friends<input type='text' name='friends'><br>
 
-	<input type='submit' value='Submit Edit'>
+	<input type='submit' value='Submit Edit' class='proeditsubmit'>
 
 </form>
 
-	<a href="/users/profile">Back to Profile</a>
+<div class='proedithead'>
+	Password Reset
+</div>
 
-	<h2>Password Reset</h2>
-
-<form method='POST' action='/users/p_password'>
+<form class='profileedit' method='POST' action='/users/p_password'>
 	
 	Email: <input type='text' name='email'><br>
 	Current Password <input type='password' name='password'><br>
-	New Password <input type="password" name='newpassword'>
+	New Password <input type="password" name='newpassword'><br>
 
-	<input type='submit' value='Submit Change'>
+	<input type='submit' value='Submit Change' class='proeditsubmit'>
 
 </form>
+
 
 <?php else: ?>
 
