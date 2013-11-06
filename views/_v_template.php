@@ -15,6 +15,7 @@
 
 <body>	
 
+	<!-- main menu at the top of the screen-->
 	<nav>
 		<menu class="nav">
 			<li><a href='/'>Home</a></li>       
@@ -32,12 +33,12 @@
 	</nav>
 
 
+	<!-- log confirming user is logged in -->
 	<?php if($user): ?>
 		<p class="log">You are logged in as <?=$user->first_name?> <?=$user->last_name?></p><br>
 	<?php endif; ?>
 
 	<br><br>
-	<!-- insert image that goes across the page -->
 
 	<?php if(isset($content)) echo $content; ?>
 

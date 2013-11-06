@@ -1,17 +1,17 @@
-<?php foreach($posts as $post): ?>
 
-<article>
+	<!-- displays posts that match with users users posts -->
+	<?php foreach($posts as $post): ?>
 
-	<span class='posthead'><?=$post['first_name']?> <?=$post['last_name']?> says:</span>
-	
-	<p><?=$post['content']?></p>
+		<article>
 
-	<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
-	<?=Time::display($post['created'])?>
+			<span class='posthead'><?=$post['first_name']?> <?=$post['last_name']?> says:</span>
+			
+			<p><?=$post['content']?></p>
 
+			<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
+			<?=Time::display($post['created'])?>
+			</time>
 
-	</time>
+		</article>
 
-</article>
-
-<?php endforeach; ?>
+	<?php endforeach; ?>

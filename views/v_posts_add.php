@@ -1,10 +1,11 @@
+	
+	<!-- form for adding posts -->
+	<form method='POST' action='/posts/p_add'>
 
-<form method='POST' action='/posts/p_add'>
+		<textarea class='postform' name='content' placeholder='Add Post'></textarea>
 
-	<textarea class='postform' name='content' placeholder='Add Post'></textarea>
+		<br><br>
 
-	<br><br>
+		<input class='submit' type='Submit' value='New post'>
 
-	<input class='submit' type='Submit' value='New post'>
-
-</form>
+	</form>

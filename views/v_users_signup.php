@@ -1,12 +1,17 @@
-<div class='prohead'>Please, Sign Up</div>
-
-<form class='profileedit' method='POST' action='/users/p_signup'>
 	
-	First Name <input type='text' name='first_name'><br>
-	Last Name <input type='text' name='last_name'><br>
-	Email <input type='text' name='email'><br>
-	Password <input type='password' name='password'><br>
+	<!-- signup head -->
+	<div class='prohead'>
+		Please, Sign Up
+	</div>
 
-	<input class='proeditsubmit' type='submit' value='Sign Up'>
+	<!-- signup form -->
+	<form class='profileedit' method='POST' action='/users/p_signup'>
+		
+		First Name <input type='text' name='first_name'><br>
+		Last Name <input type='text' name='last_name'><br>
+		Email <input type='text' name='email'><br>
+		Password <input type='password' name='password'><br>
 
-</form>
+		<input class='proeditsubmit' type='submit' value='Sign Up'>
+
+	</form>

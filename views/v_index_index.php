@@ -1,38 +1,41 @@
-<div class='title'>
 
-	Constellations Unknown
+	<!-- landing page title -->
+	<div class='title'>
 
-</div>
+		Constellations Unknown
 
-<div class='subtitle'>
+	</div>
 
-	Your home for pretentiosity...
+	<!-- landing page subtitle -->
+	<div class='subtitle'>
 
-</div>
+		Your home for pretentiosity...
 
-<div class='plusone'>
-	
-	NOW FEATURING: Profile Editing! and Password Reset!
+	</div>
 
-</div>
+	<!-- plusone announcement -->
+	<div class='plusone'>
+		
+		NOW FEATURING: Profile Editing! and Password Reset!
 
+	</div>
 
-<?php if ($user): ?>
+	<!-- if user is logged in, then display welcome message -->
+	<?php if ($user): ?>
 
-<div class="landing">
-	
-	Hello <?=$user->first_name;?>
+		<div class="landing">
+			
+			Hello <?=$user->first_name;?>
 
-</div>
+		</div>
 
+	<!-- if user is not logged ask them to login or signup -->
+	<?php else: ?>
 
-<?php else: ?>
+		<div class="nouser">
 
-<div class="nouser">
+			Please <a href='/users/signup'>Sign Up</a> or <a href='/users/login'>Log In</a>
+							
+		</div>
 
-	Please <a href='/users/signup'>Sign Up</a> or <a href='/users/login'>Log In</a>
-					
-</div>
-
-
-<?php endif; ?>
+	<?php endif; ?>
