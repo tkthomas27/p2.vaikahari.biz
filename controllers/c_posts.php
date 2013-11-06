@@ -6,7 +6,7 @@ class posts_controller extends base_controller {
  		parent::__construct();
 
  		if(!$this->user) {
- 			die("Members only");
+ 			die('Please, <a href="/users/login">Login</a>');
  		}
  	}
 

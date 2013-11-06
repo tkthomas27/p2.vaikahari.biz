@@ -20,6 +20,10 @@
 
 <?php else: ?>
 
-	<h1>No user specified</h1>
+<div class="nouser">
+
+	Please sign up or log in
+
+</div>
 
 <?php endif; ?>

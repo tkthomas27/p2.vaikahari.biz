@@ -85,7 +85,7 @@ class users_controller extends base_controller {
     public function profile($user_name = NULL) {
 
         if(!$this->user){
-            die('Members only. <a href="/users/login">Login</a>');
+            die('Please, <a href="/users/login">Login</a>');
         }
 
         //set up the view
@@ -103,7 +103,7 @@ class users_controller extends base_controller {
     public function profileedit($user_name = NULL) {
 
         if(!$this->user){
-            die('Members only. <a href="/users/login">Login</a>');
+            die('Please, <a href="/users/login">Login</a>');
         }
 
         //set up the view

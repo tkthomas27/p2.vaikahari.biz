@@ -1,6 +1,12 @@
 <div class='title'>
 
-	Welcome to App
+	Constellations Unknown
+
+</div>
+
+<div class='subtitle'>
+
+	Your home for pretentiosity...
 
 </div>
 
@@ -22,8 +28,8 @@
 
 <?php else: ?>
 
-<div class="landing">
-<!-- fix this -->
+<div class="nouser">
+
 	Please sign up or log in
 
 </div>
