@@ -22,7 +22,7 @@ class users_controller extends base_controller {
 		//check input for blank fields, if blanks exist, die and show error message
 		foreach($_POST as $field => $value) {
 			if(empty($value)) {
-				die("<h2>Please, No blank fields</h2><br><a href=/'/users/signup/'>Sign Up</a>");
+				die("<h2>Please, No blank fields</h2><br><a href='/users/signup'>Sign Up</a>");
 			}
 		}
 
@@ -31,7 +31,7 @@ class users_controller extends base_controller {
 
 		//if email exists, die and show an error message
 		if($exists){
-			die("<h2>Please, that email is already in use</h2><br><a href=/'/users/signup/'>Sign Up</a>");
+			die("<h2>Please, that email is already in use</h2><br><a href='/users/signup'>Sign Up</a>");
 		}
 
 		else {
