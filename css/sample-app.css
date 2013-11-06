@@ -7,11 +7,11 @@ body {
 }
 
 menu {
-    margin:0;
-    padding:0;
-    list-style: none;
-    overflow: hidden;
-    border-radius: 10px;
+	margin:0;
+	padding:0;
+	list-style: none;
+	overflow: hidden;
+	border-radius: 10px;
 }
 
 nav li {
@@ -341,3 +341,25 @@ article time {
 	font-size: 20px;
 	padding-top: 3px;
 }
+
+::-webkit-input-placeholder {
+    color:white;
+}
+
+:-moz-placeholder {
+    color:white;
+}
+
+::-moz-placeholder{
+    color:white;
+
+}
+:-ms-input-placeholder {
+	color:white;
+}
+
+
+
+
+
+
