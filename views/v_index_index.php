@@ -30,8 +30,8 @@
 
 <div class="nouser">
 
-	Please sign up or log in
-
+	Please <a href='/users/signup'>Sign Up</a> or <a href='/users/login'>Log In</a>
+					
 </div>
 
 

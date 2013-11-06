@@ -141,6 +141,15 @@ li a:hover,a:active {
 	color:#5C4B51;
 }
 
+.nouser a{
+	color:#8CBEB2;
+	text-decoration: none;
+}
+
+.nouser a:hover{
+	color:#F06060;
+}
+
 .edit a{
 	padding:10px;
 	width:150px;
@@ -317,3 +326,7 @@ article time {
 	position:relative;
 }
 
+.error {
+	position:relative;
+	color:red;
+}
